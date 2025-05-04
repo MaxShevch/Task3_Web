@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head><title>Casdoor Login</title></head>
+<body>
+  <h2>Casdoor Login (Token in Cookie)</h2>
+  <div id="status">Not logged in</div>
+  <button onclick="location.href='/login'">Login with Casdoor</button>
+  <button onclick="getUserInfo()">Get User Info</button>
+  <pre id="userinfo"></pre>
+
+  <script>
+    async function getUserInfo() {
+      const res = await fetch('/userinfo');
+      if (res.ok) {
+        const data = await res.json();
+        document.getElementById('status').textContent = "Already logged in!";
+        document.getElementById('userinfo').textContent = JSON.stringify(data, null, 2);
+      } else {
+        document.getElementById('status').textContent = "Not logged in";
+      }
+    }
+
+    getUserInfo();
+  </script>
+</body>
+</html>
